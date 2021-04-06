@@ -1,4 +1,4 @@
-class Pokemon {
+export class Pokemon {
     name: string;
 
     constructor(name: string) {
