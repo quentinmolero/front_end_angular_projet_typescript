@@ -22,7 +22,10 @@ export class Pokemon implements IPokemonProps{
         return this.speed;
     }
 
-    public isPokemonQuicker(foe: Pokemon): boolean {
-        return this.getPokemonSpeed() >= foe.getPokemonSpeed();
+    public isPokemonQuickerThanFoe(foe: Pokemon): boolean {
+        if (this.getPokemonSpeed() !== foe.getPokemonSpeed()) {
+            return this.getPokemonSpeed() > foe.getPokemonSpeed();
+        }
+        return Math.random() > 0.5;
     }
 }
