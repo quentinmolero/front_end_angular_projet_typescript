@@ -7,6 +7,7 @@ export async function fetchPokemon(name: string): Promise<IPokemonProps> {
     const pokemon: any = await data.json();
     return {
         name: pokemon.name,
+        health: 0,
         moves: pokemon.moves,
         speed: 0,
         stats: pokemon.stats
