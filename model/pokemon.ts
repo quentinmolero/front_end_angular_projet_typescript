@@ -1,7 +1,7 @@
 export interface IPokemonProps {
     name: string;
-    health: Number;
-    speed: Number;
+    health: number;
+    speed: number;
     moves: IPokemonAttackProps[];
     stats: Object[];
 }
@@ -13,8 +13,8 @@ export interface IPokemonAttackProps {
 
 export class Pokemon implements IPokemonProps{
     name: string;
-    health: Number;
-    speed: Number;
+    health: number;
+    speed: number;
     moves: IPokemonAttackProps[];
     stats: Object[];
 

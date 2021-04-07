@@ -54,5 +54,5 @@ describe("test pokemon move", () => {
 
     it("Pickachu is first Squirtle and use mega-punch", () => {
         expect(Turn.findAttackingPokemon(pickachu, squirtle).getPokemonAttack(randomMock).name).toBe("mega-punch");
-    })
+    });
 });
