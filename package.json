@@ -2,11 +2,11 @@
   "name": "front_end_angular_projet_typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "build": "tsc",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --collectCoverage --watchAll"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/quentinmolero/front_end_angular_projet_typescript/issues"
   },
-  "homepage": "https://github.com/quentinmolero/front_end_angular_projet_typescript#readme"
+  "homepage": "https://github.com/quentinmolero/front_end_angular_projet_typescript#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.22",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
+  }
 }
