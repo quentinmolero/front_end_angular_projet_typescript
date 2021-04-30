@@ -64,20 +64,22 @@ describe("test pokemon fight", () => {
     let fight: Fight;
 
     beforeEach(() => {
-        pickachuMoves = [{name: "mega-punch", damage: 10},
-            {name: "pay-day", damage: 0},
-            {name: "thunder-punch", damage: 5},
-            {name: "slam", damage: 10}];
+        pickachuMoves = [{name: "mega-punch", damage: 15},
+            {name: "pay-day", damage: 5},
+            {name: "thunder-punch", damage: 10},
+            {name: "slam", damage: 15}];
         squirtleMoves = [{name: "ice-punch", damage: 0},
             {name: "mega-punch", damage: 0},
             {name: "mega-kick", damage: 0},
             {name: "headbutt", damage: 0}];
         pickachu = new Pokemon({name: "Pikachu", health: 50, moves: pickachuMoves, speed: 20, stats: []});
-        squirtle = new Pokemon({name: "Squirtle", health: 60, moves: squirtleMoves, speed: 15, stats: []});
+        squirtle = new Pokemon({name: "Squirtle", health: 40, moves: squirtleMoves, speed: 15, stats: []});
         fight = new Fight(pickachu, squirtle);
+
+        jest.setTimeout(60_000);
     });
 
-    it("Pikachu should win the fight", () => {
-        expect(fight.startFight()).toBe(pickachu);
+    it("Pikachu should win the fight", async () => {
+        expect(await fight.startFight()).toBe(pickachu);
     });
 });
