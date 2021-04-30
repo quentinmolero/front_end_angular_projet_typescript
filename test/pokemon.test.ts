@@ -1,5 +1,6 @@
 import {IPokemonAttackProps, Pokemon} from "../model/pokemon";
 import {Turn} from "../model/turn.model";
+import {Fight} from "../model/fight.model";
 
 describe("test pokemon speed", () => {
     let pickachu: Pokemon, squirtle: Pokemon, charmander: Pokemon;
@@ -54,5 +55,29 @@ describe("test pokemon move", () => {
 
     it("Pickachu is first Squirtle and use mega-punch", () => {
         expect(Turn.findAttackingPokemon(pickachu, squirtle).getPokemonAttack(randomMock).name).toBe("mega-punch");
+    });
+});
+
+describe("test pokemon fight", () => {
+    let pickachu: Pokemon, squirtle: Pokemon;
+    let pickachuMoves: IPokemonAttackProps[], squirtleMoves: IPokemonAttackProps[];
+    let fight: Fight;
+
+    beforeEach(() => {
+        pickachuMoves = [{name: "mega-punch", damage: 10},
+            {name: "pay-day", damage: 0},
+            {name: "thunder-punch", damage: 5},
+            {name: "slam", damage: 10}];
+        squirtleMoves = [{name: "ice-punch", damage: 0},
+            {name: "mega-punch", damage: 0},
+            {name: "mega-kick", damage: 0},
+            {name: "headbutt", damage: 0}];
+        pickachu = new Pokemon({name: "Pikachu", health: 50, moves: pickachuMoves, speed: 20, stats: []});
+        squirtle = new Pokemon({name: "Squirtle", health: 60, moves: squirtleMoves, speed: 15, stats: []});
+        fight = new Fight(pickachu, squirtle);
+    });
+
+    it("Pikachu should win the fight", () => {
+        expect(fight.startFight()).toBe(pickachu);
     });
 });
