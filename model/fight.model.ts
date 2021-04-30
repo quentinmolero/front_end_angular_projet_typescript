@@ -20,6 +20,8 @@ export class Fight implements IFightProps{
     }
 
     ifAnyPokemonDead(): boolean {
+        if (this.isPokemonDead(this.firstPokemon) && this.isPokemonDead(this.secondPokemon))
+            throw new Error("Both pokemon can't die");
         return this.isPokemonDead(this.secondPokemon) || this.isPokemonDead(this.firstPokemon);
     }
 

@@ -60,20 +60,20 @@ describe("test pokemon move", () => {
 
 describe("test pokemon fight", () => {
     let pickachu: Pokemon, squirtle: Pokemon;
-    let pickachuMoves: IPokemonAttackProps[], squirtleMoves: IPokemonAttackProps[];
+    let winnerMoves: IPokemonAttackProps[], looserMoves: IPokemonAttackProps[];
     let fight: Fight;
 
     beforeEach(() => {
-        pickachuMoves = [{name: "mega-punch", damage: 15},
+        winnerMoves = [{name: "mega-punch", damage: 15},
             {name: "pay-day", damage: 5},
             {name: "thunder-punch", damage: 10},
             {name: "slam", damage: 15}];
-        squirtleMoves = [{name: "ice-punch", damage: 0},
+        looserMoves = [{name: "ice-punch", damage: 0},
             {name: "mega-punch", damage: 0},
             {name: "mega-kick", damage: 0},
             {name: "headbutt", damage: 0}];
-        pickachu = new Pokemon({name: "Pikachu", health: 50, moves: pickachuMoves, speed: 20, stats: []});
-        squirtle = new Pokemon({name: "Squirtle", health: 40, moves: squirtleMoves, speed: 15, stats: []});
+        pickachu = new Pokemon({name: "Pikachu", health: 50, moves: winnerMoves, speed: 20, stats: []});
+        squirtle = new Pokemon({name: "Squirtle", health: 40, moves: looserMoves, speed: 15, stats: []});
         fight = new Fight(pickachu, squirtle);
 
         jest.setTimeout(20_000);
@@ -81,5 +81,27 @@ describe("test pokemon fight", () => {
 
     it("Pikachu should win the fight", async () => {
         expect(await fight.startFight()).toBe(pickachu);
+    });
+
+    it("Squirtle should win the fight", async () => {
+        pickachu.moves = looserMoves;
+        squirtle.moves = winnerMoves;
+        expect(await fight.startFight()).toBe(squirtle);
+    });
+
+    it("Pickachu should win because squirtle is already ko", async () => {
+        squirtle.health = 0;
+        expect(await fight.startFight()).toBe(pickachu);
+    });
+
+    it("Pickachu should win because squirtle is already ko", async () => {
+        squirtle.health = 0;
+        expect(await fight.startFight()).toBe(pickachu);
+    });
+
+    it("Both pokemons are dead before the fight", () => {
+        pickachu.health = 0;
+        squirtle.health = 0;
+        expect(async () => {await fight.startFight()}).rejects.toThrow();
     });
 });
