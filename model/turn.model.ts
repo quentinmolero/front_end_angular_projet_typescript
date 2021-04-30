@@ -5,7 +5,8 @@ export class Turn {
         return firstPokemon.isPokemonQuickerThanFoe(secondPokemon, random) ? firstPokemon : secondPokemon;
     }
 
-    static processPokemonAttack(attackingPokemon: Pokemon, defendingPokemon: Pokemon) {
+    static async processPokemonAttack(attackingPokemon: Pokemon, defendingPokemon: Pokemon) {
         defendingPokemon.health -= attackingPokemon.getPokemonAttack().damage;
+        await new Promise(res => setTimeout(res, 1000));
     }
 }

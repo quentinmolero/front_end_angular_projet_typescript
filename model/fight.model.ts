@@ -23,13 +23,13 @@ export class Fight implements IFightProps{
         return this.isPokemonDead(this.secondPokemon) || this.isPokemonDead(this.firstPokemon);
     }
 
-    processFight() {
+    async processFight() {
         const firstAttackingPokemon = Turn.findAttackingPokemon(this.firstPokemon, this.secondPokemon);
         const lastAttackingPokemon = firstAttackingPokemon === this.firstPokemon ? this.secondPokemon : this.firstPokemon;
 
-        Turn.processPokemonAttack(firstAttackingPokemon, lastAttackingPokemon);
+        await Turn.processPokemonAttack(firstAttackingPokemon, lastAttackingPokemon);
         if (!this.isPokemonDead(lastAttackingPokemon)) {
-            Turn.processPokemonAttack(lastAttackingPokemon, firstAttackingPokemon);
+            await Turn.processPokemonAttack(lastAttackingPokemon, firstAttackingPokemon);
         }
     }
 
@@ -37,9 +37,9 @@ export class Fight implements IFightProps{
         return this.isPokemonDead(this.firstPokemon) ? this.secondPokemon : this.firstPokemon;
     }
 
-    startFight(): Pokemon {
+    async startFight(): Promise<Pokemon> {
         while (!this.ifAnyPokemonDead()) {
-            this.processFight();
+            await this.processFight();
         }
         return this.determineWinner();
     }
