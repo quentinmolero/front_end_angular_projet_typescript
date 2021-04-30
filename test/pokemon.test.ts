@@ -76,7 +76,7 @@ describe("test pokemon fight", () => {
         squirtle = new Pokemon({name: "Squirtle", health: 40, moves: squirtleMoves, speed: 15, stats: []});
         fight = new Fight(pickachu, squirtle);
 
-        jest.setTimeout(60_000);
+        jest.setTimeout(20_000);
     });
 
     it("Pikachu should win the fight", async () => {
